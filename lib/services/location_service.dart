@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import '../core/result/result.dart';
 
 /// Service for location-related operations
@@ -75,13 +76,13 @@ class LocationService {
     final dLat = _degreesToRadians(lat2 - lat1);
     final dLon = _degreesToRadians(lon2 - lon1);
     
-    final a = (dLat / 2).sin() * (dLat / 2).sin() +
-        _degreesToRadians(lat1).cos() *
-            _degreesToRadians(lat2).cos() *
-            (dLon / 2).sin() *
-            (dLon / 2).sin();
+    final a = math.sin(dLat / 2) * math.sin(dLat / 2) +
+        math.cos(_degreesToRadians(lat1)) *
+            math.cos(_degreesToRadians(lat2)) *
+            math.sin(dLon / 2) *
+            math.sin(dLon / 2);
     
-    final c = 2 * a.sqrt().asin();
+    final c = 2 * math.asin(math.sqrt(a));
     
     return earthRadius * c;
   }

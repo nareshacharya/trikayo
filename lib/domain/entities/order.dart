@@ -1,8 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'meal.dart';
-
 part 'order.g.dart';
 
 enum OrderStatus {

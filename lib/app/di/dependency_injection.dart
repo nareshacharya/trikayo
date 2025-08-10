@@ -43,7 +43,7 @@ final mealBoxProvider = Provider<Box>((ref) {
 
 // Service providers
 final authServiceProvider = Provider<AuthService>((ref) {
-  return AuthService();
+  return FirebaseAuthService();
 });
 
 final nutritionServiceProvider = Provider<NutritionService>((ref) {

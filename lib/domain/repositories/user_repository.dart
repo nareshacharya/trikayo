@@ -1,4 +1,4 @@
-import '../core/result/result.dart';
+import '../../core/result/result.dart';
 import '../entities/user.dart';
 import '../entities/nutrition_profile.dart';
 import '../entities/subscription.dart';

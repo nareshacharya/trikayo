@@ -25,7 +25,7 @@ abstract class BaseController extends StateNotifier<AsyncValue<void>> {
       }
     }
     
-    state = AsyncValue.error(error, stackTrace);
+    state = AsyncValue.error(error, stackTrace ?? StackTrace.current);
   }
 
   /// Handles a Result and updates the state accordingly

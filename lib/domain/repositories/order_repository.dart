@@ -1,4 +1,4 @@
-import '../core/result/result.dart';
+import '../../core/result/result.dart';
 import '../entities/order.dart';
 
 /// Repository interface for order-related operations

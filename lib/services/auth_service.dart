@@ -49,7 +49,7 @@ class FirebaseAuthService implements AuthService {
       );
       
       // This will throw an exception if verification fails
-      return const Failure(Exception('Phone verification not completed'));
+      return Failure(Exception('Phone verification not completed'));
     } catch (e) {
       return Failure(Exception('Sign in failed: $e'));
     }

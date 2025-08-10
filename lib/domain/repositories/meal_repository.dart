@@ -1,4 +1,4 @@
-import '../core/result/result.dart';
+import '../../core/result/result.dart';
 import '../entities/meal.dart';
 
 /// Repository interface for meal-related operations
