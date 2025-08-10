@@ -8,7 +8,11 @@ import '../datasources/mock_meal_datasource.dart';
 
 /// Repository for meal-related data operations
 class MealRepository implements domain.MealRepository {
+  // TODO: Will be used for API calls in future implementation
+  // ignore: unused_field
   final Dio _dio;
+  // TODO: Will be used for local storage in future implementation
+  // ignore: unused_field
   final Box _mealBox;
 
   MealRepository(this._dio, this._mealBox);

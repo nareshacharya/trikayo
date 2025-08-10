@@ -8,8 +8,10 @@ class MockMealDataSource {
       Meal(
         id: '1',
         title: 'Grilled Chicken Salad',
-        description: 'Fresh mixed greens with grilled chicken breast, cherry tomatoes, and balsamic vinaigrette',
-        imageUrl: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400',
+        description:
+            'Fresh mixed greens with grilled chicken breast, cherry tomatoes, and balsamic vinaigrette',
+        imageUrl:
+            'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400',
         price: 12.99,
         calories: 350,
         macros: const Macros(
@@ -20,8 +22,8 @@ class MockMealDataSource {
           sugar: 5.0,
           sodium: 450.0,
         ),
-        allergens: ['dairy'],
-        tags: ['healthy', 'protein', 'salad', 'low-carb'],
+        allergens: const ['dairy'],
+        tags: const ['healthy', 'protein', 'salad', 'low-carb'],
         vendorId: 'vendor1',
         isAvailable: true,
         rating: 4.5,
@@ -32,8 +34,10 @@ class MockMealDataSource {
       Meal(
         id: '2',
         title: 'Quinoa Buddha Bowl',
-        description: 'Nutritious quinoa bowl with roasted vegetables, avocado, and tahini dressing',
-        imageUrl: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400',
+        description:
+            'Nutritious quinoa bowl with roasted vegetables, avocado, and tahini dressing',
+        imageUrl:
+            'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400',
         price: 14.99,
         calories: 420,
         macros: const Macros(
@@ -44,8 +48,8 @@ class MockMealDataSource {
           sugar: 8.0,
           sodium: 380.0,
         ),
-        allergens: ['nuts'],
-        tags: ['vegan', 'vegetarian', 'healthy', 'bowl'],
+        allergens: const ['nuts'],
+        tags: const ['vegan', 'vegetarian', 'healthy', 'bowl'],
         vendorId: 'vendor2',
         isAvailable: true,
         rating: 4.7,
@@ -56,8 +60,10 @@ class MockMealDataSource {
       Meal(
         id: '3',
         title: 'Salmon Teriyaki',
-        description: 'Grilled salmon with teriyaki glaze, steamed rice, and seasonal vegetables',
-        imageUrl: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400',
+        description:
+            'Grilled salmon with teriyaki glaze, steamed rice, and seasonal vegetables',
+        imageUrl:
+            'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400',
         price: 18.99,
         calories: 580,
         macros: const Macros(
@@ -68,8 +74,8 @@ class MockMealDataSource {
           sugar: 12.0,
           sodium: 620.0,
         ),
-        allergens: ['fish', 'soy'],
-        tags: ['protein', 'omega-3', 'japanese', 'healthy'],
+        allergens: const ['fish', 'soy'],
+        tags: const ['protein', 'omega-3', 'japanese', 'healthy'],
         vendorId: 'vendor1',
         isAvailable: true,
         rating: 4.8,
@@ -80,8 +86,10 @@ class MockMealDataSource {
       Meal(
         id: '4',
         title: 'Mediterranean Pasta',
-        description: 'Whole wheat pasta with olive oil, cherry tomatoes, olives, and feta cheese',
-        imageUrl: 'https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=400',
+        description:
+            'Whole wheat pasta with olive oil, cherry tomatoes, olives, and feta cheese',
+        imageUrl:
+            'https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=400',
         price: 13.99,
         calories: 480,
         macros: const Macros(
@@ -92,8 +100,8 @@ class MockMealDataSource {
           sugar: 6.0,
           sodium: 520.0,
         ),
-        allergens: ['dairy', 'gluten'],
-        tags: ['mediterranean', 'vegetarian', 'pasta'],
+        allergens: const ['dairy', 'gluten'],
+        tags: const ['mediterranean', 'vegetarian', 'pasta'],
         vendorId: 'vendor3',
         isAvailable: true,
         rating: 4.3,
@@ -104,8 +112,10 @@ class MockMealDataSource {
       Meal(
         id: '5',
         title: 'Beef Stir Fry',
-        description: 'Tender beef strips with colorful vegetables in a savory sauce, served with brown rice',
-        imageUrl: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400',
+        description:
+            'Tender beef strips with colorful vegetables in a savory sauce, served with brown rice',
+        imageUrl:
+            'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400',
         price: 16.99,
         calories: 520,
         macros: const Macros(
@@ -116,8 +126,8 @@ class MockMealDataSource {
           sugar: 8.0,
           sodium: 680.0,
         ),
-        allergens: ['soy'],
-        tags: ['protein', 'asian', 'stir-fry', 'beef'],
+        allergens: const ['soy'],
+        tags: const ['protein', 'asian', 'stir-fry', 'beef'],
         vendorId: 'vendor2',
         isAvailable: true,
         rating: 4.6,
@@ -128,8 +138,10 @@ class MockMealDataSource {
       Meal(
         id: '6',
         title: 'Vegetable Curry',
-        description: 'Spicy vegetable curry with chickpeas, served with basmati rice and naan bread',
-        imageUrl: 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400',
+        description:
+            'Spicy vegetable curry with chickpeas, served with basmati rice and naan bread',
+        imageUrl:
+            'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400',
         price: 11.99,
         calories: 380,
         macros: const Macros(
@@ -140,8 +152,8 @@ class MockMealDataSource {
           sugar: 10.0,
           sodium: 420.0,
         ),
-        allergens: ['gluten'],
-        tags: ['vegan', 'vegetarian', 'indian', 'spicy', 'curry'],
+        allergens: const ['gluten'],
+        tags: const ['vegan', 'vegetarian', 'indian', 'spicy', 'curry'],
         vendorId: 'vendor3',
         isAvailable: true,
         rating: 4.4,
@@ -163,17 +175,17 @@ class MockMealDataSource {
   static List<Meal> searchMeals(String query) {
     final meals = getMockMeals();
     final lowercaseQuery = query.toLowerCase();
-    
+
     return meals.where((meal) {
       return meal.title.toLowerCase().contains(lowercaseQuery) ||
-             meal.description.toLowerCase().contains(lowercaseQuery) ||
-             meal.tags.any((tag) => tag.toLowerCase().contains(lowercaseQuery));
+          meal.description.toLowerCase().contains(lowercaseQuery) ||
+          meal.tags.any((tag) => tag.toLowerCase().contains(lowercaseQuery));
     }).toList();
   }
 
   static List<Meal> getMealsByTags(List<String> tags) {
     final meals = getMockMeals();
-    
+
     return meals.where((meal) {
       return tags.any((tag) => meal.tags.contains(tag));
     }).toList();
@@ -181,7 +193,7 @@ class MockMealDataSource {
 
   static List<Meal> getMealsByCalorieRange(int minCalories, int maxCalories) {
     final meals = getMockMeals();
-    
+
     return meals.where((meal) {
       return meal.calories >= minCalories && meal.calories <= maxCalories;
     }).toList();

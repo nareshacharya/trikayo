@@ -48,7 +48,10 @@ sealed class Result<T> extends Equatable {
   /// Executes a function only if this is a success result
   void whenSuccess(void Function(T value) callback) {
     if (isSuccess) {
-      callback(successValue!);
+      final value = successValue;
+      if (value != null) {
+        callback(value);
+      }
     }
   }
 

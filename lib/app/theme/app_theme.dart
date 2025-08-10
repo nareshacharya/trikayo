@@ -7,20 +7,16 @@ class AppTheme {
   static const Color _errorColor = Color(0xFFB00020);
   
   // Light theme colors
-  static const Color _lightBackground = Color(0xFFFAFAFA);
   static const Color _lightSurface = Color(0xFFFFFFFF);
   static const Color _lightOnPrimary = Color(0xFFFFFFFF);
   static const Color _lightOnSecondary = Color(0xFF000000);
-  static const Color _lightOnBackground = Color(0xFF000000);
   static const Color _lightOnSurface = Color(0xFF000000);
   static const Color _lightOnError = Color(0xFFFFFFFF);
   
   // Dark theme colors
-  static const Color _darkBackground = Color(0xFF121212);
   static const Color _darkSurface = Color(0xFF1E1E1E);
   static const Color _darkOnPrimary = Color(0xFF000000);
   static const Color _darkOnSecondary = Color(0xFF000000);
-  static const Color _darkOnBackground = Color(0xFFFFFFFF);
   static const Color _darkOnSurface = Color(0xFFFFFFFF);
   static const Color _darkOnError = Color(0xFF000000);
 
@@ -78,7 +74,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
         ),
       ),
-      textTheme: _buildTextTheme(_lightOnBackground),
+      textTheme: _buildTextTheme(_lightOnSurface),
     );
   }
 
@@ -136,7 +132,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
         ),
       ),
-      textTheme: _buildTextTheme(_darkOnBackground),
+      textTheme: _buildTextTheme(_darkOnSurface),
     );
   }
 

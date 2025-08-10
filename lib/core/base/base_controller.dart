@@ -4,14 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../result/result.dart';
 
-/// Base class for all controllers in the app
-abstract class BaseController extends StateNotifier<AsyncValue<void>> {
+/// Base controller class that provides common functionality for all controllers
+abstract class BaseController<T> extends StateNotifier<AsyncValue<T?>> {
+  final List<dynamic> _disposables = [];
+
   BaseController() : super(const AsyncValue.data(null));
 
-  /// List of disposables to be disposed when the controller is disposed
-  final List<dynamic> _disposables = <dynamic>[];
-
-  /// Adds a disposable to the list
+  /// Adds a disposable resource that will be cleaned up when the controller is disposed
   void addDisposable(dynamic disposable) {
     _disposables.add(disposable);
   }
@@ -19,20 +18,20 @@ abstract class BaseController extends StateNotifier<AsyncValue<void>> {
   /// Handles errors and updates the state accordingly
   void handleError(Object error, [StackTrace? stackTrace]) {
     if (kDebugMode) {
-      print('Error in ${runtimeType}: $error');
+      print('Error in $runtimeType: $error');
       if (stackTrace != null) {
         print('StackTrace: $stackTrace');
       }
     }
-    
+
     state = AsyncValue.error(error, stackTrace ?? StackTrace.current);
   }
 
   /// Handles a Result and updates the state accordingly
-  void handleResult<T>(Result<T> result) {
+  void handleResult<R>(Result<R> result) {
     result.when(
-      success: (_) {
-        state = const AsyncValue.data(null);
+      success: (value) {
+        state = AsyncValue.data(value as T?);
       },
       failure: (exception) {
         handleError(exception);
@@ -52,7 +51,8 @@ abstract class BaseController extends StateNotifier<AsyncValue<void>> {
   }
 
   /// Executes an async operation that returns a Result
-  Future<void> executeWithResult<T>(Future<Result<T>> Function() operation) async {
+  Future<void> executeWithResult<R>(
+      Future<Result<R>> Function() operation) async {
     try {
       state = const AsyncValue.loading();
       final result = await operation();
@@ -89,7 +89,7 @@ abstract class BaseController extends StateNotifier<AsyncValue<void>> {
       }
     }
     _disposables.clear();
-    
+
     super.dispose();
   }
 }
@@ -107,19 +107,17 @@ mixin LoadingMixin on BaseController {
 }
 
 /// Mixin for controllers that need to handle data states
-mixin DataMixin<T> on BaseController {
-  /// The current data state
-  AsyncValue<T> get dataState => state.map(
-    data: (data) => AsyncValue.data(data.value as T),
-    loading: (loading) => AsyncValue.loading(),
-    error: (error) => AsyncValue.error(error.error, error.stackTrace),
-  );
-
+mixin DataMixin<T> on BaseController<T> {
   /// Sets the data state
   void setData(T data) {
     state = AsyncValue.data(data);
   }
 
   /// Returns the current data value
-  T? get data => dataState.value;
+  T? get data {
+    if (state.hasValue) {
+      return state.value;
+    }
+    return null;
+  }
 }

@@ -56,7 +56,7 @@ class MockAuthService implements AuthService {
       String phoneNumber) async {
     try {
       // Mock implementation - simulate sending OTP
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
       return Success(MockUserCredential(
         user: MockUser(
           uid: 'mock_uid_${DateTime.now().millisecondsSinceEpoch}',
@@ -73,7 +73,7 @@ class MockAuthService implements AuthService {
       String verificationId, String smsCode) async {
     try {
       // Mock implementation - simulate OTP verification
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
       if (smsCode == '123456') {
         // Mock valid OTP
         _currentUser = MockUser(

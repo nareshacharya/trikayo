@@ -14,11 +14,9 @@ linter:
     implementation_imports: true
     library_names: true
     library_prefixes: true
-    package_api_docs: true
     package_names: true
     package_prefixed_library_names: true
     prefer_contains: true
-    prefer_equal_for_default_values: true
     prefer_initializing_formals: true
     prefer_is_empty: true
     prefer_is_not_empty: true

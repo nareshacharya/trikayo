@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'subscription_plan.dart';
+
 part 'user.g.dart';
 
 @JsonSerializable()
@@ -14,6 +16,8 @@ class User extends Equatable {
   final DateTime updatedAt;
   final bool isActive;
   final Map<String, dynamic>? preferences;
+  final PlanTier? currentTier;
+  final String? subscriptionId;
 
   const User({
     required this.id,
@@ -25,6 +29,8 @@ class User extends Equatable {
     required this.updatedAt,
     this.isActive = true,
     this.preferences,
+    this.currentTier,
+    this.subscriptionId,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -40,6 +46,8 @@ class User extends Equatable {
     DateTime? updatedAt,
     bool? isActive,
     Map<String, dynamic>? preferences,
+    PlanTier? currentTier,
+    String? subscriptionId,
   }) {
     return User(
       id: id ?? this.id,
@@ -51,6 +59,8 @@ class User extends Equatable {
       updatedAt: updatedAt ?? this.updatedAt,
       isActive: isActive ?? this.isActive,
       preferences: preferences ?? this.preferences,
+      currentTier: currentTier ?? this.currentTier,
+      subscriptionId: subscriptionId ?? this.subscriptionId,
     );
   }
 
@@ -65,5 +75,7 @@ class User extends Equatable {
         updatedAt,
         isActive,
         preferences,
+        currentTier,
+        subscriptionId,
       ];
 }

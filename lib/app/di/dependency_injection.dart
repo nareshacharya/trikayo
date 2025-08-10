@@ -7,6 +7,7 @@ import '../../services/auth_service.dart';
 import '../../services/nutrition_service.dart';
 import '../../services/payment_service.dart';
 import '../../services/location_service.dart';
+import '../../services/subscription_service.dart';
 import '../../data/repositories/auth_repository.dart';
 import '../../data/repositories/meal_repository.dart';
 import '../../data/repositories/user_repository.dart';
@@ -27,7 +28,7 @@ final dioProvider = Provider<Dio>((ref) {
   return dio;
 });
 
-// SharedPreferences instance
+// SharedPreferences instance - will be initialized in main
 final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
   throw UnimplementedError('SharedPreferences must be initialized');
 });
@@ -58,6 +59,10 @@ final locationServiceProvider = Provider<LocationService>((ref) {
   return LocationService();
 });
 
+final subscriptionServiceProvider = Provider<SubscriptionService>((ref) {
+  return MockSubscriptionService();
+});
+
 // Repository providers
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   final authService = ref.watch(authServiceProvider);
@@ -79,7 +84,7 @@ final userRepositoryProvider = Provider<UserRepository>((ref) {
 // Initialize dependencies
 Future<void> initializeDependencies() async {
   // Initialize SharedPreferences
-  final sharedPrefs = await SharedPreferences.getInstance();
+  // Note: This is handled in main.dart now
 
   // Initialize Hive boxes
   await Hive.openBox('user');

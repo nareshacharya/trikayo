@@ -10,20 +10,36 @@ import '../../features/post_meal/view/post_meal_screen.dart';
 import '../../features/paywall/view/paywall_screen.dart';
 import '../../features/profile/view/profile_screen.dart';
 import '../../features/home/view/home_screen.dart';
+import '../../features/auth/controller/auth_controller.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
-    initialLocation: '/',
+    initialLocation: '/auth',
+    redirect: (context, state) {
+      final authState = ref.read(authControllerProvider);
+
+      // If user is authenticated and trying to access auth screen, redirect to home
+      if (authState.isAuthenticated && state.matchedLocation == '/auth') {
+        return '/home';
+      }
+
+      // If user is not authenticated and trying to access protected routes, redirect to auth
+      if (!authState.isAuthenticated && state.matchedLocation != '/auth') {
+        return '/auth';
+      }
+
+      return null;
+    },
     routes: [
-      GoRoute(
-        path: '/',
-        name: 'home',
-        builder: (context, state) => const HomeScreen(),
-      ),
       GoRoute(
         path: '/auth',
         name: 'auth',
         builder: (context, state) => const AuthScreen(),
+      ),
+      GoRoute(
+        path: '/home',
+        name: 'home',
+        builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
         path: '/catalog',
@@ -81,7 +97,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => context.go('/'),
+              onPressed: () => context.go('/home'),
               child: const Text('Go Home'),
             ),
           ],
