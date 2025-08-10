@@ -17,13 +17,13 @@ final dioProvider = Provider<Dio>((ref) {
   dio.options.baseUrl = 'https://api.trikayo.com';
   dio.options.connectTimeout = const Duration(seconds: 30);
   dio.options.receiveTimeout = const Duration(seconds: 30);
-  
+
   // Add interceptors for logging, auth, etc.
   dio.interceptors.add(LogInterceptor(
     requestBody: true,
     responseBody: true,
   ));
-  
+
   return dio;
 });
 
@@ -43,7 +43,7 @@ final mealBoxProvider = Provider<Box>((ref) {
 
 // Service providers
 final authServiceProvider = Provider<AuthService>((ref) {
-  return FirebaseAuthService();
+  return MockAuthService();
 });
 
 final nutritionServiceProvider = Provider<NutritionService>((ref) {
@@ -80,11 +80,11 @@ final userRepositoryProvider = Provider<UserRepository>((ref) {
 Future<void> initializeDependencies() async {
   // Initialize SharedPreferences
   final sharedPrefs = await SharedPreferences.getInstance();
-  
+
   // Initialize Hive boxes
   await Hive.openBox('user');
   await Hive.openBox('meals');
-  
+
   // Override the SharedPreferences provider
   // Note: In a real app, you might want to use a more sophisticated DI approach
   // This is a simplified version for demonstration

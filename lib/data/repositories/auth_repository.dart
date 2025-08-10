@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../services/auth_service.dart';
 import '../../core/result/result.dart';
@@ -12,15 +11,17 @@ class AuthRepository {
   AuthRepository(this._authService, this._prefs);
 
   /// Get the current user
-  User? get currentUser => _authService.currentUser;
+  MockUser? get currentUser => _authService.currentUser;
 
   /// Sign in with phone number
-  Future<Result<UserCredential>> signInWithPhoneNumber(String phoneNumber) async {
+  Future<Result<MockUserCredential>> signInWithPhoneNumber(
+      String phoneNumber) async {
     return await _authService.signInWithPhoneNumber(phoneNumber);
   }
 
   /// Verify OTP code
-  Future<Result<UserCredential>> verifyOTP(String verificationId, String smsCode) async {
+  Future<Result<MockUserCredential>> verifyOTP(
+      String verificationId, String smsCode) async {
     return await _authService.verifyOTP(verificationId, smsCode);
   }
 
@@ -32,7 +33,7 @@ class AuthRepository {
   }
 
   /// Get auth state changes stream
-  Stream<User?> get authStateChanges => _authService.authStateChanges;
+  Stream<MockUser?> get authStateChanges => _authService.authStateChanges;
 
   /// Save user data to local storage
   Future<void> saveUserData(Map<String, dynamic> userData) async {

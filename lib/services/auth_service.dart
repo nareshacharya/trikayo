@@ -1,79 +1,100 @@
-import 'package:firebase_auth/firebase_auth.dart';
-
+import 'dart:async';
 import '../core/result/result.dart';
+
+// Mock user class for development
+class MockUser {
+  final String uid;
+  final String? email;
+  final String? phoneNumber;
+  final bool emailVerified;
+
+  MockUser({
+    required this.uid,
+    this.email,
+    this.phoneNumber,
+    this.emailVerified = false,
+  });
+}
+
+// Mock user credential class for development
+class MockUserCredential {
+  final MockUser user;
+
+  MockUserCredential({required this.user});
+}
 
 /// Interface for authentication service
 abstract class AuthService {
   /// Get the current user
-  User? get currentUser;
+  MockUser? get currentUser;
 
   /// Sign in with phone number
-  Future<Result<UserCredential>> signInWithPhoneNumber(String phoneNumber);
+  Future<Result<MockUserCredential>> signInWithPhoneNumber(String phoneNumber);
 
   /// Verify OTP code
-  Future<Result<UserCredential>> verifyOTP(String verificationId, String smsCode);
+  Future<Result<MockUserCredential>> verifyOTP(
+      String verificationId, String smsCode);
 
   /// Sign out
   Future<Result<void>> signOut();
 
   /// Get auth state changes stream
-  Stream<User?> get authStateChanges;
+  Stream<MockUser?> get authStateChanges;
 }
 
-/// Firebase implementation of AuthService
-class FirebaseAuthService implements AuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+/// Mock implementation of AuthService for development
+class MockAuthService implements AuthService {
+  MockUser? _currentUser;
+  final StreamController<MockUser?> _authStateController =
+      StreamController<MockUser?>.broadcast();
 
   @override
-  User? get currentUser => _auth.currentUser;
+  MockUser? get currentUser => _currentUser;
 
   @override
-  Future<Result<UserCredential>> signInWithPhoneNumber(String phoneNumber) async {
+  Future<Result<MockUserCredential>> signInWithPhoneNumber(
+      String phoneNumber) async {
     try {
-      final result = await _auth.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          // Auto-verification if the phone number is instantly verified
-          await _auth.signInWithCredential(credential);
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          throw Exception('Verification failed: ${e.message}');
-        },
-        codeSent: (String verificationId, int? resendToken) {
-          // Store verificationId for later use
-          _verificationId = verificationId;
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-          _verificationId = verificationId;
-        },
-      );
-      
-      // This will throw an exception if verification fails
-      return Failure(Exception('Phone verification not completed'));
+      // Mock implementation - simulate sending OTP
+      await Future.delayed(Duration(seconds: 1));
+      return Success(MockUserCredential(
+        user: MockUser(
+          uid: 'mock_uid_${DateTime.now().millisecondsSinceEpoch}',
+          phoneNumber: phoneNumber,
+        ),
+      ));
     } catch (e) {
-      return Failure(Exception('Sign in failed: $e'));
+      return Failure(Exception('Failed to send OTP: $e'));
     }
   }
 
   @override
-  Future<Result<UserCredential>> verifyOTP(String verificationId, String smsCode) async {
+  Future<Result<MockUserCredential>> verifyOTP(
+      String verificationId, String smsCode) async {
     try {
-      final credential = PhoneAuthProvider.credential(
-        verificationId: verificationId,
-        smsCode: smsCode,
-      );
-      
-      final userCredential = await _auth.signInWithCredential(credential);
-      return Success(userCredential);
+      // Mock implementation - simulate OTP verification
+      await Future.delayed(Duration(seconds: 1));
+      if (smsCode == '123456') {
+        // Mock valid OTP
+        _currentUser = MockUser(
+          uid: 'mock_uid_${DateTime.now().millisecondsSinceEpoch}',
+          phoneNumber: '+1234567890',
+        );
+        _authStateController.add(_currentUser);
+        return Success(MockUserCredential(user: _currentUser!));
+      } else {
+        return Failure(Exception('Invalid OTP'));
+      }
     } catch (e) {
-      return Failure(Exception('OTP verification failed: $e'));
+      return Failure(Exception('Failed to verify OTP: $e'));
     }
   }
 
   @override
   Future<Result<void>> signOut() async {
     try {
-      await _auth.signOut();
+      _currentUser = null;
+      _authStateController.add(null);
       return const Success(null);
     } catch (e) {
       return Failure(Exception('Sign out failed: $e'));
@@ -81,7 +102,5 @@ class FirebaseAuthService implements AuthService {
   }
 
   @override
-  Stream<User?> get authStateChanges => _auth.authStateChanges();
-
-  String? _verificationId;
+  Stream<MockUser?> get authStateChanges => _authStateController.stream;
 }
